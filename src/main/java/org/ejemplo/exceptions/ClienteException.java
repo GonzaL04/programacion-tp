@@ -1,7 +1,11 @@
 package org.ejemplo.exceptions;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
+@Getter
+@Setter
 public class ClienteException extends Exception {
 
     private HttpStatus statusCode;

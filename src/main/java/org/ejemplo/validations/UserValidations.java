@@ -4,7 +4,7 @@ import org.ejemplo.exceptions.UserRegistrationException;
 import org.ejemplo.modelos.Usuario;
 import org.ejemplo.repository.UsuarioRepository;
 
-public class UserValidations {
+public class UserValidations implements Validation {
     private final UsuarioRepository usuarioRepository;
 
     public UserValidations(UsuarioRepository usuarioRepository) {
@@ -17,13 +17,14 @@ public class UserValidations {
         }
     }
 
-    public void validateRole(String role) {
-        if (!role.equalsIgnoreCase("administrador") && !role.equalsIgnoreCase("vendedor")) {
-            throw new UserRegistrationException("El rol del usuario es inválido");
-        }
-        if (role.isBlank()) {
-            throw new UserRegistrationException("Debe ingresar un rol");
-        }
+    @Override
+    public void validarTexto(String role) {
+            if (!role.equalsIgnoreCase("administrador") && !role.equalsIgnoreCase("vendedor")) {
+                throw new UserRegistrationException("El rol del usuario es inválido");
+            }
+            if (role.isBlank()) {
+                throw new UserRegistrationException("Debe ingresar un rol");
+            }
     }
 }
 

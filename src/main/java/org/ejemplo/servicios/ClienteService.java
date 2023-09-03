@@ -1,9 +1,7 @@
 package org.ejemplo.servicios;
 
 import org.ejemplo.exceptions.ClienteException;
-import org.ejemplo.exceptions.ProductoException;
 import org.ejemplo.modelos.Cliente;
-import org.ejemplo.modelos.Producto;
 import org.ejemplo.repository.ClienteRepository;
 import org.ejemplo.validations.ClienteValidations;
 import org.springframework.http.HttpStatus;

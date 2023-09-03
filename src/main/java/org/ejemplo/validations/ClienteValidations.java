@@ -6,7 +6,7 @@ import org.ejemplo.modelos.Cliente;
 import org.ejemplo.repository.ClienteRepository;
 import org.springframework.http.HttpStatus;
 
-public class ClienteValidations {
+public class ClienteValidations implements Validation{
 
     private final ClienteRepository clienteRepository;
 
@@ -15,9 +15,7 @@ public class ClienteValidations {
     }
 
     public void validateNombreCliente(String nombre) throws ClienteException {
-        if (nombre.isBlank() && nombre.isEmpty()) {
-            throw new ClienteException(HttpStatus.PRECONDITION_FAILED, "El nombre no puede ser nulo", "ClienteExcepcion");
-        }
+
     }
 
     public Boolean clienteExists(Integer id){
@@ -25,20 +23,22 @@ public class ClienteValidations {
     }
 
     public void validateClienteData(Cliente cliente) throws ClienteException {
-        if (cliente.getNombre() == null || cliente.getNombre().isEmpty()) {
+        if (cliente.getNombre().isEmpty() || cliente.getNombre().isBlank()) {
             throw new ClienteException(HttpStatus.PRECONDITION_FAILED, "El nombre del producto es requerido", "ClienteExcepcion");
         }
-        if (cliente.getDni() == null ) {
-            throw new ClienteException(HttpStatus.PRECONDITION_FAILED, "La descripción del producto es requerida", "ClienteExcepcion");
-        }
-        if (cliente.getCuit() == null) {
-            throw new ClienteException(HttpStatus.PRECONDITION_FAILED, "El stock del producto es requerido", "ClienteExcepcion");
-        }
-        if (cliente.getDireccion() == null) {
+        if (cliente.getDireccion().isEmpty() || cliente.getDireccion().isBlank()) {
             throw new ClienteException(HttpStatus.PRECONDITION_FAILED, "El precio del producto es requerido", "ClienteExcepcion");
         }
-        if (cliente.getTelefono() == null) {
+        if (cliente.getTelefono().isEmpty() || cliente.getTelefono().isBlank()) {
             throw new ClienteException(HttpStatus.PRECONDITION_FAILED, "El precio del producto es requerido", "ClienteExcepcion");
+        }
+    }
+
+
+    @Override
+    public void validarTexto(String nombre) throws ClienteException {
+        if (nombre.isBlank() && nombre.isEmpty()) {
+            throw new ClienteException(HttpStatus.PRECONDITION_FAILED, "El nombre no puede ser nulo", "ClienteExcepcion");
         }
     }
 }

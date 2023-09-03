@@ -1,31 +1,24 @@
 package org.ejemplo.modelos;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "DetalleFactura")
+@Getter@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 public class DetalleFactura {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "producto", nullable = false)
+    @OneToOne(fetch = FetchType.EAGER)
     private Producto producto;
-
-    @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
-
-    @Column(name = "precio_unitario", nullable = false)
     private Double precioUnitario;
-
-    @Column (name = "precio_total", nullable = false)
     private Double precioTotal;
-
-    @Column (name = "factura", nullable = false)
-    private Integer factura;
 }
